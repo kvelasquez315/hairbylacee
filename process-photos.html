@@ -11,96 +11,9 @@
       background: #f7f4f1;
       color: #2c2825;
       padding: 2rem;
-      min-height: 100vh;
     }
-    h1 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+    h1 { font-size: 1.6rem; margin-bottom: 0.3rem; }
     .subtitle { color: #7a6c63; margin-bottom: 2rem; font-size: 0.95rem; }
-
-    .drop-zone {
-      border: 2px dashed #c4a89a;
-      border-radius: 16px;
-      padding: 3rem 2rem;
-      text-align: center;
-      background: white;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-      margin-bottom: 2rem;
-    }
-    .drop-zone.over { background: #fdf0eb; border-color: #a0665a; }
-    .drop-zone p { color: #7a6c63; }
-    .drop-zone strong { color: #a0665a; }
-    #file-input { display: none; }
-
-    .instructions {
-      background: white;
-      border-radius: 12px;
-      padding: 1.2rem 1.5rem;
-      margin-bottom: 2rem;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      border-left: 3px solid #c4a89a;
-    }
-    .instructions h3 { margin-bottom: 0.5rem; font-size: 0.95rem; }
-    .instructions ol { padding-left: 1.2rem; }
-    .instructions li { margin-bottom: 0.3rem; color: #5a4f49; }
-    .instructions li span.label { font-weight: 600; color: #2c2825; }
-
-    #results {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .result-card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(44,40,37,0.09);
-    }
-    .result-card .card-header {
-      padding: 0.8rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #f0ebe7;
-    }
-    .result-card h3 { font-size: 0.9rem; }
-    .result-card .badge {
-      font-size: 0.7rem;
-      background: #f0ebe7;
-      color: #7a6c63;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-    .preview-wrap {
-      position: relative;
-      background: #1a1410;
-    }
-    .result-card canvas {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-    .result-card .card-footer {
-      padding: 0.8rem 1rem;
-      display: flex;
-      gap: 0.5rem;
-    }
-    .btn-dl {
-      flex: 1;
-      background: #2c2825;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 0.55rem 1rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.15s;
-    }
-    .btn-dl:hover { background: #a0665a; }
-    .btn-dl:disabled { background: #ccc; cursor: not-allowed; }
 
     #dl-all {
       display: none;
@@ -113,62 +26,135 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s;
     }
     #dl-all:hover { background: #8a5149; }
-
-    .status { font-size: 0.78rem; color: #7a6c63; margin-top: 0.3rem; }
-    .processing-note {
-      text-align: center;
-      color: #7a6c63;
+    #progress {
+      margin-bottom: 1.5rem;
       font-size: 0.9rem;
-      padding: 1rem;
+      color: #7a6c63;
     }
+
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .slot {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(44,40,37,0.08);
+    }
+
+    .slot-header {
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid #f0ebe7;
+    }
+    .slot-num {
+      background: #f0ebe7;
+      color: #7a6c63;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .slot-num.done { background: #2c2825; color: white; }
+    .slot-label { font-size: 0.85rem; font-weight: 600; flex: 1; }
+    .slot-badge {
+      font-size: 0.7rem;
+      color: #7a6c63;
+      background: #f7f4f1;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+
+    .slot-drop {
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      border: 2px dashed #e0d6d0;
+      border-radius: 0;
+      transition: background 0.15s, border-color 0.15s;
+      padding: 1rem;
+      text-align: center;
+      color: #b5a49b;
+      font-size: 0.85rem;
+    }
+    .slot-drop:hover, .slot-drop.over {
+      background: #fdf0eb;
+      border-color: #c4a89a;
+      color: #a0665a;
+    }
+    .slot-drop .icon { font-size: 1.6rem; }
+    .slot-drop input { display: none; }
+
+    .slot-preview {
+      display: none;
+      position: relative;
+      background: #1a1410;
+    }
+    .slot-preview canvas {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .slot-preview .reuse-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.55);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .slot-preview .reuse-btn:hover { background: rgba(160,102,90,0.85); }
+
+    .slot-footer {
+      padding: 0.7rem 1rem;
+      border-top: 1px solid #f0ebe7;
+    }
+    .btn-dl {
+      width: 100%;
+      background: #2c2825;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-dl:hover { background: #a0665a; }
+    .btn-dl:disabled { background: #ccc; cursor: not-allowed; }
   </style>
 </head>
 <body>
 
 <h1>Salon Photo Processor</h1>
-<p class="subtitle">Crops & enhances all 12 photos (10 hair work + 2 Lacee portraits)</p>
+<p class="subtitle">Drop each photo into its labeled slot — order is locked in</p>
 
-<div class="instructions">
-  <h3>How to use</h3>
-  <ol>
-    <li>Drop all 12 photos into the zone below <strong>in order</strong> (or select them)</li>
-    <li>Each photo is auto-cropped and enhanced — previews appear below</li>
-    <li>Download individual photos or use <strong>Download All</strong></li>
-    <li>Move the downloaded files into <code>salon/images/</code></li>
-  </ol>
-  <br/>
-  <strong>Hair work photos (1–10):</strong><br/>
-  <span class="label">1.</span> Ash-blonde texture &nbsp;|&nbsp;
-  <span class="label">2.</span> Brunette balayage &nbsp;|&nbsp;
-  <span class="label">3.</span> Blonde girl, flower wall &nbsp;|&nbsp;
-  <span class="label">4.</span> Dark waves full shot &nbsp;|&nbsp;
-  <span class="label">5.</span> Reddish-brown after &nbsp;|&nbsp;
-  <span class="label">6.</span> Silver/ash hair &nbsp;|&nbsp;
-  <span class="label">7.</span> Long dark curly &nbsp;|&nbsp;
-  <span class="label">8.</span> Blonde wavy, sage jacket &nbsp;|&nbsp;
-  <span class="label">9.</span> Pink highlights &nbsp;|&nbsp;
-  <span class="label">10.</span> Dark brunette waves<br/><br/>
-  <strong>Lacee portraits (11–12):</strong><br/>
-  <span class="label">11.</span> Lacee — sitting in chair (→ saves as lacee1.jpg) &nbsp;|&nbsp;
-  <span class="label">12.</span> Lacee — with flowers (→ saves as lacee2.jpg)
-</div>
-
-<div class="drop-zone" id="drop-zone">
-  <p style="font-size:2rem; margin-bottom:0.5rem;">📁</p>
-  <p><strong>Drop all 12 photos here</strong></p>
-  <p>or click to select files</p>
-  <input type="file" id="file-input" multiple accept="image/*" />
-</div>
-
-<button id="dl-all">⬇ Download All 12 Photos</button>
-
-<div id="results"></div>
+<p id="progress">0 / 12 photos added</p>
+<button id="dl-all">⬇ Download All</button>
+<div class="slots" id="slots"></div>
 
 <script>
-// Crop boxes: [left%, top%, right%, bottom%] as 0–1 fractions
 const CROPS = {
   1:  [0.50, 0.03, 1.00, 0.97],
   2:  [0.47, 0.03, 1.00, 0.97],
@@ -180,9 +166,10 @@ const CROPS = {
   8:  [0.44, 0.03, 1.00, 0.97],
   9:  [0.03, 0.05, 0.97, 0.97],
   10: [0.47, 0.03, 1.00, 0.97],
+  11: [0.04, 0.02, 0.96, 0.97],
+  12: [0.03, 0.02, 0.97, 0.97],
 };
 
-// Enhancement: [brightness, contrast, saturation] — CSS filter values
 const ENHANCE = {
   1:  { brightness: 1.08, contrast: 1.22, saturate: 1.15 },
   2:  { brightness: 1.10, contrast: 1.20, saturate: 1.20 },
@@ -194,118 +181,110 @@ const ENHANCE = {
   8:  { brightness: 1.12, contrast: 1.18, saturate: 1.22 },
   9:  { brightness: 1.10, contrast: 1.18, saturate: 1.25 },
   10: { brightness: 1.08, contrast: 1.25, saturate: 1.15 },
-  // Lacee portraits — gentle warmth only, keep skin tones natural
   11: { brightness: 1.06, contrast: 1.14, saturate: 1.12 },
   12: { brightness: 1.06, contrast: 1.14, saturate: 1.12 },
 };
 
-// Lacee portraits use minimal crop — nearly full frame
-Object.assign(CROPS, {
-  11: [0.04, 0.02, 0.96, 0.97],   // chair shot — trim slight edge space
-  12: [0.03, 0.02, 0.97, 0.97],   // flowers shot — already perfectly framed
-});
-
-// Output filenames — Lacee photos save as lacee1/lacee2, not photo11/12
 const OUTPUT_NAMES = {
   11: 'lacee1.jpg',
   12: 'lacee2.jpg',
 };
 
-const LABELS = {
-  1: 'Ash blonde texture',
-  2: 'Brunette balayage',
-  3: 'Blonde, flower wall',
-  4: 'Dark waves, full shot',
-  5: 'Reddish-brown after',
-  6: 'Silver/ash from behind',
-  7: 'Long dark curly',
-  8: 'Blonde wavy, sage jacket',
-  9: 'Pink highlights',
-  10: 'Dark brunette waves',
-  11: 'Lacee — chair portrait',
-  12: 'Lacee — with flowers',
-};
+const LABELS = [
+  null,
+  'Ash-blonde texture',
+  'Brunette balayage',
+  'Blonde, flower wall',
+  'Dark waves full shot',
+  'Reddish-brown after',
+  'Silver/ash from behind',
+  'Long dark curly',
+  'Blonde wavy, sage jacket',
+  'Pink highlights',
+  'Dark brunette waves',
+  'Lacee — chair portrait',
+  'Lacee — with flowers',
+];
 
 const TARGET_W = 800;
 const TARGET_H = 1066;
 
-let processedCanvases = {};
+const processedCanvases = {};
+const slotsEl = document.getElementById('slots');
+const dlAll   = document.getElementById('dl-all');
+const progress = document.getElementById('progress');
 
-const dropZone = document.getElementById('drop-zone');
-const fileInput = document.getElementById('file-input');
-const results  = document.getElementById('results');
-const dlAll    = document.getElementById('dl-all');
-
-dropZone.addEventListener('click', () => fileInput.click());
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
-dropZone.addEventListener('drop', e => {
-  e.preventDefault();
-  dropZone.classList.remove('over');
-  handleFiles([...e.dataTransfer.files]);
-});
-fileInput.addEventListener('change', () => handleFiles([...fileInput.files]));
-
-function handleFiles(files) {
-  // Sort by name so numbered files come in order
-  files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-  results.innerHTML = '';
-  processedCanvases = {};
-  dlAll.style.display = 'none';
-
-  if (files.length === 0) return;
-
-  const total = Math.min(files.length, 12);
-  results.innerHTML = `<p class="processing-note">Processing ${total} photo${total>1?'s':''}…</p>`;
-
-  Promise.all(files.slice(0, 12).map((file, i) => processFile(file, i + 1)))
-    .then(() => {
-      dlAll.style.display = 'inline-block';
-    });
+function updateProgress() {
+  const done = Object.keys(processedCanvases).length;
+  progress.textContent = `${done} / 12 photos added`;
+  dlAll.style.display = done > 0 ? 'inline-block' : 'none';
 }
 
-function processFile(file, num) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        const card = createCard(num);
-        if (results.querySelector('.processing-note')) {
-          results.innerHTML = '';
-        }
-        results.appendChild(card);
-        requestAnimationFrame(() => {
-          renderToCanvas(img, num, card.querySelector('canvas'));
-          resolve();
-        });
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
+// Build the 12 slots
+for (let num = 1; num <= 12; num++) {
+  const outName = OUTPUT_NAMES[num] || `photo${num}.jpg`;
+
+  const slot = document.createElement('div');
+  slot.className = 'slot';
+  slot.id = `slot-${num}`;
+  slot.innerHTML = `
+    <div class="slot-header">
+      <div class="slot-num" id="num-${num}">${num}</div>
+      <div class="slot-label">${LABELS[num]}</div>
+      <div class="slot-badge" id="badge-${num}">empty</div>
+    </div>
+    <div class="slot-drop" id="drop-${num}">
+      <div class="icon">+</div>
+      <div>Drop photo here<br/>or click to choose</div>
+      <input type="file" accept="image/*" id="input-${num}" />
+    </div>
+    <div class="slot-preview" id="preview-${num}">
+      <canvas id="canvas-${num}"></canvas>
+      <button class="reuse-btn" data-num="${num}">Replace</button>
+    </div>
+    <div class="slot-footer">
+      <button class="btn-dl" id="dl-${num}" disabled>Download ${outName}</button>
+    </div>
+  `;
+  slotsEl.appendChild(slot);
+
+  const dropEl  = slot.querySelector(`#drop-${num}`);
+  const inputEl = slot.querySelector(`#input-${num}`);
+
+  dropEl.addEventListener('click', () => inputEl.click());
+  dropEl.addEventListener('dragover', e => { e.preventDefault(); dropEl.classList.add('over'); });
+  dropEl.addEventListener('dragleave', () => dropEl.classList.remove('over'));
+  dropEl.addEventListener('drop', e => {
+    e.preventDefault();
+    dropEl.classList.remove('over');
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file, num);
+  });
+  inputEl.addEventListener('change', () => {
+    if (inputEl.files[0]) processFile(inputEl.files[0], num);
+  });
+
+  slot.querySelector('.reuse-btn').addEventListener('click', () => {
+    inputEl.click();
+  });
+
+  slot.querySelector(`#dl-${num}`).addEventListener('click', () => {
+    if (processedCanvases[num]) downloadCanvas(processedCanvases[num], outName);
   });
 }
 
-function createCard(num) {
-  const card = document.createElement('div');
-  card.className = 'result-card';
-  card.id = `card-${num}`;
-  card.innerHTML = `
-    <div class="card-header">
-      <h3>Photo ${num} — ${LABELS[num]}</h3>
-      <span class="badge">Processing…</span>
-    </div>
-    <div class="preview-wrap">
-      <canvas id="canvas-${num}"></canvas>
-    </div>
-    <div class="card-footer">
-      <button class="btn-dl" id="dl-${num}" disabled>Download photo${num}.jpg</button>
-    </div>
-  `;
-  return card;
+function processFile(file, num) {
+  document.getElementById(`badge-${num}`).textContent = 'processing…';
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => renderToCanvas(img, num);
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
-function renderToCanvas(img, num, canvas) {
+function renderToCanvas(img, num) {
   const crop = CROPS[num];
   const enh  = ENHANCE[num];
 
@@ -317,52 +296,39 @@ function renderToCanvas(img, num, canvas) {
   const sw = Math.floor(iw * (crop[2] - crop[0]));
   const sh = Math.floor(ih * (crop[3] - crop[1]));
 
-  // Determine scale to fill TARGET
   const scale = Math.max(TARGET_W / sw, TARGET_H / sh);
   const drawW = Math.round(sw * scale);
   const drawH = Math.round(sh * scale);
   const offX  = Math.round((drawW - TARGET_W) / 2);
   const offY  = Math.round((drawH - TARGET_H) / 2);
 
-  // Offscreen canvas for correct-size output
   const off = document.createElement('canvas');
   off.width  = TARGET_W;
   off.height = TARGET_H;
   const ctx = off.getContext('2d');
-
-  // Apply CSS-style filters via ctx.filter
-  ctx.filter = [
-    `brightness(${enh.brightness})`,
-    `contrast(${enh.contrast})`,
-    `saturate(${enh.saturate})`,
-  ].join(' ');
-
+  ctx.filter = `brightness(${enh.brightness}) contrast(${enh.contrast}) saturate(${enh.saturate})`;
   ctx.drawImage(img, sx, sy, sw, sh, -offX, -offY, drawW, drawH);
 
-  // Copy to visible preview canvas (scaled down)
+  const canvas = document.getElementById(`canvas-${num}`);
   canvas.width  = TARGET_W;
   canvas.height = TARGET_H;
-  const pCtx = canvas.getContext('2d');
-  pCtx.drawImage(off, 0, 0);
+  canvas.getContext('2d').drawImage(off, 0, 0);
 
-  // Store processed canvas
   processedCanvases[num] = off;
 
-  // Update card
-  const badge = document.querySelector(`#card-${num} .badge`);
-  if (badge) badge.textContent = `${TARGET_W}×${TARGET_H}`;
+  document.getElementById(`drop-${num}`).style.display   = 'none';
+  document.getElementById(`preview-${num}`).style.display = 'block';
+  document.getElementById(`badge-${num}`).textContent = `${TARGET_W}×${TARGET_H}`;
+  document.getElementById(`num-${num}`).classList.add('done');
 
   const dlBtn = document.getElementById(`dl-${num}`);
-  if (dlBtn) {
-    const outName = OUTPUT_NAMES[num] || `photo${num}.jpg`;
-    dlBtn.textContent = `Download ${outName}`;
-    dlBtn.disabled = false;
-    dlBtn.addEventListener('click', () => downloadCanvas(off, outName));
-  }
+  dlBtn.disabled = false;
+
+  updateProgress();
 }
 
 function downloadCanvas(canvas, filename) {
-  canvas.toBlob((blob) => {
+  canvas.toBlob(blob => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -373,11 +339,11 @@ function downloadCanvas(canvas, filename) {
 }
 
 dlAll.addEventListener('click', async () => {
-  const nums = Object.keys(processedCanvases).map(Number).sort((a,b)=>a-b);
+  const nums = Object.keys(processedCanvases).map(Number).sort((a, b) => a - b);
   for (const num of nums) {
     const outName = OUTPUT_NAMES[num] || `photo${num}.jpg`;
     downloadCanvas(processedCanvases[num], outName);
-    await new Promise(r => setTimeout(r, 200));
+    await new Promise(r => setTimeout(r, 220));
   }
 });
 </script>
