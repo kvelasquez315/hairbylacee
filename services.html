@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Lumière Salon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== SERVICE CATEGORIES ===== */
+    .services-main {
+      background: var(--warm-white);
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .tab-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      border: 2px solid var(--light-gray);
+      background: white;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--warm-gray);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: white;
+    }
+
+    /* ===== SERVICE BLOCKS ===== */
+    .service-block {
+      margin-bottom: 4rem;
+    }
+
+    .service-block-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .block-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(201,137,110,0.12);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .block-title {
+      font-size: 1.4rem;
+      font-family: var(--font-serif);
+    }
+
+    .service-items {
+      display: grid;
+      gap: 1px;
+      background: var(--light-gray);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.8rem;
+      background: white;
+      transition: background var(--transition);
+      gap: 1rem;
+    }
+
+    .service-item:hover {
+      background: var(--cream);
+    }
+
+    .service-item-info {
+      flex: 1;
+    }
+
+    .service-item-name {
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.2rem;
+      font-size: 0.97rem;
+    }
+
+    .service-item-desc {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .service-item-price {
+      font-weight: 700;
+      color: var(--rose);
+      font-size: 0.97rem;
+      white-space: nowrap;
+    }
+
+    .service-item-duration {
+      font-size: 0.78rem;
+      color: var(--warm-gray);
+      text-align: right;
+      margin-top: 0.2rem;
+    }
+
+    /* ===== INFO CARDS ===== */
+    .info-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .info-card-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .info-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      font-family: var(--font-sans);
+    }
+
+    .info-card p {
+      font-size: 0.84rem;
+      color: var(--warm-gray);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ===== POLICY SECTION ===== */
+    .policy-section {
+      background: var(--charcoal);
+      padding: 4rem;
+      border-radius: var(--radius);
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .policy-section h3 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .policy-section p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.92rem;
+      margin: 0;
+    }
+
+    .policy-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .policy-list li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .policy-list li span:first-child {
+      color: var(--blush);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .info-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .policy-section {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+
+      .service-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .service-item-price {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Lumi<span>ère</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html#booking" class="nav-cta">Book Now</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="section-label">Our Menu</div>
+    <h1>Services & Pricing</h1>
+    <div class="divider"></div>
+    <p class="section-subtitle">Quality treatments for every hair type and style goal — clearly priced with no surprises.</p>
+  </section>
+
+  <!-- MAIN SERVICES -->
+  <section class="section services-main">
+    <div class="container">
+
+      <!-- Info Strip -->
+      <div class="info-strip fade-in">
+        <div class="info-card">
+          <div class="info-card-icon">💬</div>
+          <div>
+            <h4>Free Consultation</h4>
+            <p>Every visit begins with a thorough chat about your hair goals, history, and lifestyle.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🌿</div>
+          <div>
+            <h4>Premium Products</h4>
+            <p>We use only professional-grade, nourishing products that are gentle on your hair.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🎓</div>
+          <div>
+            <h4>Certified Stylists</h4>
+            <p>All our stylists are licensed, experienced, and continuously trained on new techniques.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuts & Styling -->
+      <div class="service-block fade-in">
+        <div class="service-block-header">
+          <div class="block-icon">✂️</div>
+          <h3 class="block-title">Cuts & Styling</h3>
+        </div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Women's Cut & Blowout</div>
+              <p class="service-item-desc">Includes shampoo, precision cut, and a full blowout finish.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $75</div>
+              <div class="service-item-duration">~60 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Men's Cut & Style</div>
+              <p class="service-item-desc">Shampoo, precision cut, and styled finish to suit your look.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $55</div>
+              <div class="service-item-duration">~45 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Bang Trim</div>
+              <p class="service-item-desc">Quick shape-up for your fringe between appointments.</p>
+            </div>
+            <div>
+              <div class="service-item-price">$15</div>
+              <div class="service-item-duration">~15 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Blowout Only</div>
+              <p class="service-item-desc">Shampoo and a smooth, polished blowout — no cut included.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $45</div>
+              <div class="service-item-duration">~45 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Special Occasion Updo</div>
+              <p class="service-item-desc">Bridal, prom, or event styling — discuss your vision with us.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $90</div>
+              <div class="service-item-duration">~75 min</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color -->
+      <div class="service-block fade-in">
+        <div class="service-block-header">
+          <div class="block-icon">🎨</div>
+          <h3 class="block-title">Color & Highlights</h3>
+        </div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Single Process Color</div>
+              <p class="service-item-desc">All-over color application using professional-grade dye. Includes toner.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $95</div>
+              <div class="service-item-duration">~90 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Partial Highlights</div>
+              <p class="service-item-desc">Highlights focused around the face and crown for a brightening effect.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $115</div>
+              <div class="service-item-duration">~2 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Full Highlights</div>
+              <p class="service-item-desc">Complete highlight application throughout for a full, dimensional look.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $145</div>
+              <div class="service-item-duration">~2.5 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Balayage</div>
+              <p class="service-item-desc">Hand-painted freeform color for a sun-kissed, natural gradient.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $165</div>
+              <div class="service-item-duration">~3 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Toner / Gloss</div>
+              <p class="service-item-desc">Neutralize brassiness and add shine and depth to your existing color.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $45</div>
+              <div class="service-item-duration">~30 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Color Correction</div>
+              <p class="service-item-desc">Consultation required. Pricing varies based on time and complexity.</p>
+            </div>
+            <div>
+              <div class="service-item-price">Consult</div>
+              <div class="service-item-duration">Varies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Treatments -->
+      <div class="service-block fade-in">
+        <div class="service-block-header">
+          <div class="block-icon">✨</div>
+          <h3 class="block-title">Treatments & Care</h3>
+        </div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Deep Conditioning Treatment</div>
+              <p class="service-item-desc">Intensive moisture mask applied under heat for silky, restored hair.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $35</div>
+              <div class="service-item-duration">~30 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Keratin Smoothing Treatment</div>
+              <p class="service-item-desc">Reduces frizz and adds long-lasting smoothness for up to 3 months.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $200</div>
+              <div class="service-item-duration">~3 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Scalp Treatment</div>
+              <p class="service-item-desc">Targeted scalp massage and treatment to promote hair health and growth.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $50</div>
+              <div class="service-item-duration">~45 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Bond Repair (Olaplex)</div>
+              <p class="service-item-desc">Strengthens and repairs broken bonds in chemically treated hair.</p>
+            </div>
+            <div>
+              <div class="service-item-price">From $30</div>
+              <div class="service-item-duration">~20 min add-on</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Policy -->
+      <div class="policy-section fade-in">
+        <div>
+          <h3>Booking & Cancellation Policy</h3>
+          <p>We value your time and our stylists'. Here's what you need to know before your visit.</p>
+        </div>
+        <ul class="policy-list">
+          <li><span>→</span><span>A credit card is required to reserve all appointments.</span></li>
+          <li><span>→</span><span>Please give us 24 hours notice if you need to cancel or reschedule.</span></li>
+          <li><span>→</span><span>Late cancellations or no-shows may incur a 50% service fee.</span></li>
+          <li><span>→</span><span>Arriving more than 15 minutes late may require rescheduling.</span></li>
+          <li><span>→</span><span>Prices shown are starting prices and may vary based on hair length and density.</span></li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center fade-in">
+        <h2 style="margin-bottom:1rem;">Ready to book?</h2>
+        <p class="section-subtitle" style="margin:0 auto 2rem;">Find a time that works for you and let's make it happen.</p>
+        <a href="contact.html#booking" class="btn btn-primary">Book Your Appointment</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Lumi<span style="color:var(--blush)">ère</span></a>
+        <p>A modern hair studio dedicated to making you look and feel your absolute best — every single visit.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul>
+          <li><a>Tue – Fri: 9am – 7pm</a></li>
+          <li><a>Saturday: 9am – 5pm</a></li>
+          <li><a>Sunday: 10am – 3pm</a></li>
+          <li><a>Monday: Closed</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lumière Salon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
