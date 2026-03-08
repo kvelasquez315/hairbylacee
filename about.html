@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Lumière Salon</title>
+  <title>About — Hair by Lacee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ===== STORY SECTION ===== */
@@ -24,16 +24,27 @@
 
     .story-img-main {
       width: 100%;
-      height: 520px;
-      background: linear-gradient(160deg, var(--blush) 0%, var(--rose) 60%, var(--deep-rose) 100%);
+      height: 560px;
       border-radius: var(--radius);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      background: linear-gradient(160deg, var(--blush) 0%, var(--rose) 60%, var(--deep-rose) 100%);
       color: white;
-      font-size: 5rem;
-      opacity: 0.75;
+      font-size: 2rem;
+      opacity: 0.85;
+    }
+
+    /* When story-img-main contains a real photo */
+    .story-img-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(1.04) contrast(1.16) saturate(1.18) sepia(0.07) hue-rotate(-5deg);
     }
 
     .story-img-accent {
@@ -125,82 +136,112 @@
       line-height: 1.7;
     }
 
-    /* ===== TEAM ===== */
+    /* ===== MEET LACEE ===== */
     .team-section {
       background: var(--cream);
     }
 
-    .team-grid {
+    .meet-lacee-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 3.5rem auto 0;
     }
 
-    .team-card {
-      background: white;
+    .meet-lacee-photo-wrap {
+      position: relative;
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), box-shadow var(--transition);
+      aspect-ratio: 3 / 4;
+      box-shadow: 0 24px 64px rgba(44,40,37,0.18);
     }
 
-    .team-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .team-photo {
+    .meet-lacee-photo-wrap img {
       width: 100%;
-      height: 220px;
-      background: linear-gradient(135deg, var(--light-gray) 0%, var(--blush) 100%);
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(1.05) contrast(1.14) saturate(1.14) sepia(0.06) hue-rotate(-4deg);
+      transition: transform 0.5s ease;
+    }
+
+    .meet-lacee-photo-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Placeholder */
+    .meet-photo-ph {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, var(--blush) 0%, var(--rose) 100%);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 3.5rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.5);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      gap: 0.5rem;
     }
+    .meet-photo-ph span { font-size: 2.5rem; opacity: 0.3; }
 
-    .team-info {
-      padding: 1.3rem;
-    }
-
-    .team-name {
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--charcoal);
-      margin-bottom: 0.2rem;
-    }
-
-    .team-role {
-      font-size: 0.82rem;
-      color: var(--rose);
-      font-weight: 600;
-      letter-spacing: 0.3px;
+    .meet-lacee-content .section-label {
       margin-bottom: 0.6rem;
     }
 
-    .team-bio {
-      font-size: 0.83rem;
+    .meet-lacee-content h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+
+    .meet-lacee-role {
+      font-size: 0.9rem;
+      color: var(--rose);
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .meet-lacee-bio {
+      font-size: 0.97rem;
       color: var(--warm-gray);
-      line-height: 1.6;
-      margin: 0;
+      line-height: 1.8;
+      margin-bottom: 1.6rem;
     }
 
     .team-specialty {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.8rem;
+      gap: 0.45rem;
+      margin-bottom: 2rem;
     }
 
     .specialty-tag {
-      font-size: 0.72rem;
-      background: var(--cream);
+      font-size: 0.75rem;
+      background: white;
+      border: 1px solid var(--light-gray);
       color: var(--warm-gray);
-      padding: 0.25rem 0.65rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 50px;
       font-weight: 500;
+    }
+
+    .meet-lacee-btns {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .meet-lacee-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        max-width: 500px;
+      }
     }
 
     /* ===== STUDIO ===== */
@@ -299,10 +340,11 @@
   </style>
 </head>
 <body>
+  <div class="bg-blob"></div>
 
   <!-- NAVIGATION -->
   <nav>
-    <a href="index.html" class="nav-logo">Lumi<span>ère</span></a>
+    <a href="index.html" class="nav-logo">Hair by <span>Lacee</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
@@ -317,30 +359,39 @@
 
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <div class="section-label">Our Story</div>
-    <h1>The heart behind Lumière</h1>
+    <div class="section-label">Meet Your Stylist</div>
+    <h1>The girl behind the hair</h1>
     <div class="divider"></div>
-    <p class="section-subtitle">We're not just a salon. We're a community built on craft, care, and confidence.</p>
+    <p class="section-subtitle">Good hair, good energy, and a real person who genuinely loves what she does.</p>
   </section>
 
   <!-- STORY -->
   <section class="section">
     <div class="story-grid">
       <div class="story-image">
-        <div class="story-img-main">✂</div>
+        <!-- LACEE PHOTO 1 — full portrait, ideally vertical/portrait crop
+             Replace placeholder div with:
+             <div class="story-img-main">
+               <img src="images/lacee1.jpg" alt="Lacee — Hair by Lacee" />
+             </div>
+        -->
+        <div class="story-img-main">
+          <span style="font-size: 4rem; opacity:0.4;">✂</span>
+          <span style="font-size: 0.9rem; font-family: var(--font-sans); opacity:0.5; margin-top:0.5rem;">lacee1.jpg</span>
+        </div>
         <div class="story-img-accent"></div>
         <div class="story-img-tag">
-          <strong>2012</strong>
-          <span>Founded with a vision</span>
+          <strong>@xhairbylacee</strong>
+          <span>See her work on Instagram</span>
         </div>
       </div>
       <div class="story-content fade-in">
-        <div class="section-label">How It Started</div>
-        <h2 class="section-title">Built with passion, one client at a time</h2>
+        <div class="section-label">Lacee's Story</div>
+        <h2 class="section-title">Built on passion, driven by results</h2>
         <div class="divider divider-left"></div>
-        <p>Lumière was founded in 2012 by head stylist Claire Beaumont, with a simple but powerful belief: every person who walks through our doors deserves to leave feeling more themselves. Not a version of someone else's trend — but genuinely, beautifully them.</p>
-        <p>What started as a one-chair studio in the heart of the city has grown into a full-service salon with eight talented stylists. We've stayed true to our roots: personal attention, exceptional technique, and a space where people feel genuinely welcomed.</p>
-        <p>Our name means "light" in French — and that's exactly what we aim to bring out in every client.</p>
+        <p>Lacee has been in the hair industry for two years — and in that time, she's excelled in every environment she's walked into. She didn't just get good at hair, she became someone her clients genuinely trust. New clients find her through Instagram or word of mouth after seeing her work, and they don't stop coming back.</p>
+        <p>Her specialty is hair extensions, and she's not just dabbling — she's licensed for it. Whether you want subtle length, serious volume, or a full transformation, Lacee has the training and the eye to make extensions look completely natural. Beyond extensions, she's fully proficient across all hair services: cuts, color, treatments, and everything in between.</p>
+        <p>The vibe is warm, fun, and real. Lacee loves to chat, she's genuinely invested in getting your hair right, and she brings the kind of energy that makes a salon appointment feel like a good time rather than a chore.</p>
       </div>
     </div>
   </section>
@@ -388,64 +439,44 @@
     </div>
   </section>
 
-  <!-- TEAM -->
+  <!-- MEET LACEE -->
   <section class="section team-section">
     <div class="container">
-      <div class="text-center">
-        <div class="section-label">The Stylists</div>
-        <h2 class="section-title">Meet our talented team</h2>
-        <div class="divider"></div>
-        <p class="section-subtitle">Experienced, passionate, and genuinely excited to help you love your hair.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card fade-in">
-          <div class="team-photo">👩</div>
-          <div class="team-info">
-            <div class="team-name">Claire Beaumont</div>
-            <div class="team-role">Founder & Master Stylist</div>
-            <p class="team-bio">With 18+ years in the industry, Claire's expertise spans precision cutting and advanced color techniques.</p>
-            <div class="team-specialty">
-              <span class="specialty-tag">Balayage</span>
-              <span class="specialty-tag">Precision Cuts</span>
-            </div>
+      <div class="meet-lacee-grid fade-in">
+
+        <!-- lacee2.jpg: flowers / over-shoulder portrait — editorial and warm -->
+        <!-- Swap placeholder once lacee2.jpg is in images/:
+             Remove the <div class="meet-photo-ph"> block,
+             add: <img src="images/lacee2.jpg" alt="Lacee" />
+        -->
+        <div class="meet-lacee-photo-wrap">
+          <!-- <img src="images/lacee2.jpg" alt="Lacee — Hair by Lacee" /> -->
+          <div class="meet-photo-ph">
+            <span>✂</span>
+            lacee2.jpg
           </div>
         </div>
-        <div class="team-card fade-in">
-          <div class="team-photo">👩‍🦱</div>
-          <div class="team-info">
-            <div class="team-name">Isabelle Morin</div>
-            <div class="team-role">Senior Colorist</div>
-            <p class="team-bio">Isabelle's passion is color transformation — from subtle gloss to dramatic vivids, she does it all.</p>
-            <div class="team-specialty">
-              <span class="specialty-tag">Color Correction</span>
-              <span class="specialty-tag">Vivid Color</span>
-            </div>
+
+        <div class="meet-lacee-content">
+          <div class="section-label">Your Stylist</div>
+          <h2 class="section-title">Meet <em>Lacee</em></h2>
+          <div class="divider divider-left"></div>
+          <div class="meet-lacee-role">Licensed Extensions Specialist · Full-Service Stylist</div>
+          <p class="meet-lacee-bio">Two years in the industry and already someone clients genuinely trust. Lacee is licensed specifically for extensions and proficient across every service she touches — cuts, color, treatments, all of it. She listens before she touches your hair, talks openly, and doesn't stop until she's happy with the result (and you are too).</p>
+          <p class="meet-lacee-bio">Clients find her through Instagram and word of mouth. They keep coming back.</p>
+          <div class="team-specialty">
+            <span class="specialty-tag">Hair Extensions</span>
+            <span class="specialty-tag">Color & Balayage</span>
+            <span class="specialty-tag">Cuts & Styling</span>
+            <span class="specialty-tag">Treatments</span>
+            <span class="specialty-tag">All Hair Types</span>
+          </div>
+          <div class="meet-lacee-btns">
+            <a href="contact.html#booking" class="btn btn-primary">Book with Lacee</a>
+            <a href="https://instagram.com/xhairbylacee" target="_blank" class="btn btn-outline">@xhairbylacee</a>
           </div>
         </div>
-        <div class="team-card fade-in">
-          <div class="team-photo">🧑</div>
-          <div class="team-info">
-            <div class="team-name">Marco Silva</div>
-            <div class="team-role">Stylist & Texture Specialist</div>
-            <p class="team-bio">Marco has a gift for working with natural curls, coils, and waves — celebrating every texture.</p>
-            <div class="team-specialty">
-              <span class="specialty-tag">Curly Hair</span>
-              <span class="specialty-tag">Treatments</span>
-            </div>
-          </div>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-photo">👩‍🦳</div>
-          <div class="team-info">
-            <div class="team-name">Audrey Chen</div>
-            <div class="team-role">Stylist & Bridal Specialist</div>
-            <p class="team-bio">Audrey brings a designer's eye to every updo and bridal look — stunning, elegant, long-lasting.</p>
-            <div class="team-specialty">
-              <span class="specialty-tag">Updos</span>
-              <span class="specialty-tag">Bridal</span>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -489,8 +520,8 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo">Lumi<span style="color:var(--blush)">ère</span></a>
-        <p>A modern hair studio dedicated to making you look and feel your absolute best — every single visit.</p>
+        <a href="index.html" class="nav-logo">Hair by <span style="color:var(--blush)">Lacee</span></a>
+        <p>Licensed extensions specialist and full-service stylist. Cute, elegant, and always real — just like your hair should be.</p>
       </div>
       <div class="footer-col">
         <h4>Navigate</h4>
@@ -512,7 +543,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Lumière Salon. All rights reserved.</p>
+      <p>© 2026 Hair by Lacee. All rights reserved.</p>
     </div>
   </footer>
 

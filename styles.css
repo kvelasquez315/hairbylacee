@@ -6,23 +6,25 @@
 }
 
 :root {
-  --cream: #faf7f4;
-  --warm-white: #fff9f5;
-  --blush: #e8c4b0;
-  --rose: #c9896e;
-  --deep-rose: #a5664d;
-  --charcoal: #2c2825;
-  --warm-gray: #7a6f68;
-  --light-gray: #ece8e4;
+  --cream: #fdf9f6;
+  --warm-white: #fffbf8;
+  --blush: #f0cfc0;
+  --rose: #c97b5e;
+  --deep-rose: #a85f46;
+  --charcoal: #28211e;
+  --warm-gray: #7c706a;
+  --light-gray: #ede8e3;
   --gold: #c9a96e;
+  --soft-pink: #f9ede8;
 
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-script: 'Dancing Script', cursive;
 
   --transition: 0.3s ease;
-  --shadow: 0 4px 24px rgba(44, 40, 37, 0.08);
-  --shadow-hover: 0 8px 40px rgba(44, 40, 37, 0.15);
-  --radius: 12px;
+  --shadow: 0 2px 20px rgba(44, 40, 37, 0.07);
+  --shadow-hover: 0 10px 44px rgba(44, 40, 37, 0.14);
+  --radius: 18px;
 }
 
 html {
@@ -73,19 +75,20 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem 4rem;
-  background: rgba(250, 247, 244, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(232, 196, 176, 0.3);
+  padding: 1rem 4rem;
+  background: rgba(253, 249, 246, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(240, 207, 192, 0.4);
   transition: var(--transition);
 }
 
 .nav-logo {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--charcoal);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .nav-logo span {
@@ -167,25 +170,26 @@ nav {
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-block;
-  padding: 0.85rem 2rem;
+  padding: 0.9rem 2.2rem;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
+  font-size: 0.88rem;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all var(--transition);
   border: none;
 }
 
 .btn-primary {
-  background: var(--rose);
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
   color: white;
+  box-shadow: 0 4px 16px rgba(201, 123, 94, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--deep-rose);
+  background: linear-gradient(135deg, var(--deep-rose), #8f4f38);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(201, 137, 110, 0.4);
+  box-shadow: 0 8px 24px rgba(201, 123, 94, 0.45);
 }
 
 .btn-outline {
@@ -226,12 +230,13 @@ nav {
 }
 
 .section-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-family: var(--font-script);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: none;
   color: var(--rose);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .section-title {
@@ -256,7 +261,7 @@ nav {
 /* ===== PAGE HERO (inner pages) ===== */
 .page-hero {
   padding: 10rem 4rem 5rem;
-  background: linear-gradient(135deg, var(--warm-white) 0%, var(--light-gray) 100%);
+  background: linear-gradient(160deg, var(--warm-white) 0%, var(--soft-pink) 100%);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -279,15 +284,78 @@ nav {
 
 /* ===== DIVIDER ===== */
 .divider {
-  width: 60px;
-  height: 3px;
-  background: var(--rose);
-  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   margin: 1.5rem auto;
+  width: fit-content;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1.5px;
+  background: var(--blush);
+  border-radius: 2px;
+}
+
+.divider::before {
+  content: '✦';
+  width: auto;
+  height: auto;
+  background: none;
+  font-size: 0.7rem;
+  color: var(--rose);
+  line-height: 1;
+}
+
+.divider::after {
+  display: none;
+}
+
+/* Override: actual line divider uses pseudo + content trick differently */
+/* Let's use a simpler approach: a centered element with line + diamond */
+.divider {
+  position: relative;
+  width: 100px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem auto;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--blush);
+  border-radius: 1px;
+}
+
+.divider::after {
+  content: '✦';
+  display: block;
+  font-size: 0.65rem;
+  color: var(--rose);
+  background: var(--cream);
+  padding: 0 6px;
+  position: relative;
+  z-index: 1;
 }
 
 .divider-left {
   margin-left: 0;
+  justify-content: flex-start;
+}
+
+.divider-left::after {
+  background: white;
 }
 
 /* ===== CARDS ===== */
@@ -367,6 +435,35 @@ footer {
   color: rgba(255,255,255,0.35);
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* ===== ANIMATED BACKGROUND BLOB ===== */
+.bg-blob {
+  position: fixed;
+  top: -25vh;
+  left: -20vw;
+  width: 70vw;
+  height: 70vw;
+  max-width: 800px;
+  max-height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%,
+    rgba(201, 123, 94, 0.22) 0%,
+    rgba(240, 207, 192, 0.1) 50%,
+    transparent 75%
+  );
+  filter: blur(70px);
+  animation: blobDrift 18s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes blobDrift {
+  0%   { transform: translateX(0vw)    translateY(0vh);   }
+  25%  { transform: translateX(18vw)   translateY(8vh);   }
+  50%  { transform: translateX(30vw)   translateY(-5vh);  }
+  75%  { transform: translateX(12vw)   translateY(14vh);  }
+  100% { transform: translateX(0vw)    translateY(0vh);   }
 }
 
 /* ===== ANIMATIONS ===== */

@@ -3,47 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lumière Salon — Modern Hair Studio</title>
+  <title>Hair by Lacee — Extensions & Hair Styling</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ===== HOME HERO ===== */
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.1fr;
       align-items: center;
       padding-top: 80px;
+      background: var(--cream);
       overflow: hidden;
     }
 
     .hero-content {
-      padding: 4rem 4rem 4rem 6rem;
+      padding: 4rem 3rem 4rem 6rem;
+    }
+
+    .hero-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: white;
+      border: 1px solid var(--light-gray);
+      border-radius: 50px;
+      padding: 0.45rem 1.1rem 0.45rem 0.75rem;
+      margin-bottom: 1.8rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-rating .stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .hero-rating span:last-child {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--warm-gray);
     }
 
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--rose);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 30px;
-      height: 2px;
-      background: var(--rose);
+      display: none;
     }
 
     .hero h1 {
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.6rem, 4.5vw, 4.8rem);
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.08;
+      margin-bottom: 1.4rem;
     }
 
     .hero h1 em {
@@ -52,9 +65,11 @@
     }
 
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
+      color: var(--warm-gray);
       max-width: 440px;
       margin-bottom: 2.5rem;
+      line-height: 1.75;
     }
 
     .hero-btns {
@@ -63,79 +78,239 @@
       flex-wrap: wrap;
     }
 
-    .hero-image {
-      position: relative;
-      height: 100vh;
-      background: var(--light-gray);
-      overflow: hidden;
+    .hero-badge {
+      display: none;
     }
 
-    .hero-image .hero-photo {
+    /* ===== HERO PHOTO COLLAGE ===== */
+    .hero-collage-wrap {
+      height: 100vh;
+      padding: 96px 3.5rem 2.5rem 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-collage {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      height: 84vh;
+      min-height: 520px;
+      align-items: center;
+    }
+
+    /* All three columns share base styles */
+    .collage-col {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(44, 40, 37, 0.22);
+      cursor: pointer;
+      flex: 1;
+      transition: box-shadow 0.4s ease;
+    }
+
+    /* Stagger: left slightly low, center tallest, right slightly high */
+    .collage-col-a { height: 83%; transform: translateY(4%); }
+    .collage-col-b { height: 97%; flex: 1.08; }
+    .collage-col-c { height: 85%; transform: translateY(-3%); }
+
+    .collage-col:hover {
+      box-shadow: 0 32px 80px rgba(44, 40, 37, 0.32);
+      z-index: 2;
+    }
+
+    /* Cohesive warm film filter — ties all 3 photos together */
+    .collage-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
+      display: block;
+      filter: brightness(1.04) contrast(1.18) saturate(1.22) sepia(0.09) hue-rotate(-6deg);
+      transition: filter 0.45s ease, transform 0.45s ease;
     }
 
-    /* Placeholder gradient for hero image */
-    .hero-image-placeholder {
+    .collage-col:hover .collage-photo {
+      filter: brightness(1.10) contrast(1.20) saturate(1.30) sepia(0.04) hue-rotate(-3deg);
+      transform: scale(1.04);
+    }
+
+    /* Warm rose gradient overlay — unifies tones across all 3 photos */
+    .collage-col::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(30, 18, 12, 0.55) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Service label — slides up on hover */
+    .collage-label {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.38rem 0.9rem;
+      border-radius: 50px;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .collage-col:hover .collage-label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Placeholder — shown until real photos are dropped in */
+    .collage-placeholder {
       width: 100%;
       height: 100%;
-      background: linear-gradient(160deg, #e8c4b0 0%, #c9896e 40%, #a5664d 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      font-family: var(--font-sans);
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
     }
 
-    .hero-image-placeholder .placeholder-icon {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      opacity: 0.6;
+    .collage-col-a .collage-placeholder {
+      background: linear-gradient(170deg, #3d2e28 0%, #1e1210 100%);
+    }
+    .collage-col-b .collage-placeholder {
+      background: linear-gradient(160deg, var(--rose) 0%, var(--deep-rose) 100%);
+    }
+    .collage-col-c .collage-placeholder {
+      background: linear-gradient(150deg, #c4a89a 0%, #8a6a5e 100%);
     }
 
-    .hero-image-placeholder p {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9rem;
+    .collage-placeholder span {
+      font-size: 1.8rem;
+      opacity: 0.35;
     }
 
-    .hero-badge {
+    /* ===== PORTFOLIO STRIP ===== */
+    .portfolio-strip {
+      background: var(--charcoal);
+      overflow: hidden;
+    }
+
+    .portfolio-strip-header {
+      text-align: center;
+      padding: 4rem 2rem 2.5rem;
+    }
+
+    .portfolio-strip-header .section-label {
+      color: var(--blush);
+      opacity: 0.7;
+    }
+
+    .portfolio-strip-header h2 {
+      color: white;
+    }
+
+    .portfolio-rail {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+    }
+
+    /* Same warm filter for consistency with hero */
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(1.02) contrast(1.15) saturate(1.18) sepia(0.08) hue-rotate(-5deg);
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+
+    .portfolio-item:hover img {
+      filter: brightness(1.08) contrast(1.18) saturate(1.28) sepia(0.04) hue-rotate(-3deg);
+      transform: scale(1.06);
+    }
+
+    .portfolio-overlay {
       position: absolute;
-      bottom: 3rem;
-      left: -1.5rem;
-      background: white;
-      border-radius: var(--radius);
-      padding: 1.2rem 1.5rem;
-      box-shadow: var(--shadow-hover);
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(20,12,8,0.72) 100%);
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.8rem;
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
 
-    .badge-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--cream);
-      border-radius: 50%;
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-item-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 0.35rem;
+    }
+
+    .portfolio-item-label {
+      font-size: 1.05rem;
+      font-family: var(--font-serif);
+      color: white;
+    }
+
+    /* Portfolio placeholder */
+    .portfolio-ph {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-    }
-
-    .badge-text strong {
-      display: block;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--charcoal);
-    }
-
-    .badge-text span {
+      font-family: var(--font-sans);
       font-size: 0.8rem;
-      color: var(--warm-gray);
+      color: rgba(255,255,255,0.3);
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .portfolio-ph span { font-size: 2rem; opacity: 0.2; }
+
+    .portfolio-item:nth-child(1) .portfolio-ph { background: #2a1f1a; }
+    .portfolio-item:nth-child(2) .portfolio-ph { background: #1e1714; }
+    .portfolio-item:nth-child(3) .portfolio-ph { background: #261c18; }
+
+    .portfolio-strip-footer {
+      text-align: center;
+      padding: 2.5rem 2rem 4rem;
     }
 
     /* ===== STATS BAR ===== */
@@ -423,19 +598,28 @@
       }
 
       .hero-content {
-        padding: 6rem 2rem 3rem;
+        padding: 6rem 2rem 2.5rem;
         order: 2;
       }
 
-      .hero-image {
-        height: 50vw;
+      .hero-collage-wrap {
+        height: 62vw;
         min-height: 300px;
+        padding: 80px 2rem 1.5rem;
         order: 1;
       }
 
-      .hero-badge {
-        left: 1rem;
-        bottom: 1.5rem;
+      .hero-collage {
+        height: 100%;
+        min-height: unset;
+      }
+
+      .portfolio-rail {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .portfolio-item:nth-child(3) {
+        display: none;
       }
 
       .stats-inner {
@@ -465,15 +649,29 @@
     }
 
     @media (max-width: 600px) {
-      .hero-content {
-        padding: 6rem 1.5rem 2rem;
+      .hero-collage-wrap {
+        height: 75vw;
+        padding: 80px 1rem 1rem;
       }
 
-      .services-grid {
+      .hero-collage {
+        gap: 6px;
+      }
+
+      .hero-content {
+        padding: 2rem 1.5rem 3rem;
+      }
+
+      .portfolio-rail {
         grid-template-columns: 1fr;
       }
 
-      .testimonials-grid {
+      .portfolio-item:nth-child(2),
+      .portfolio-item:nth-child(3) {
+        display: none;
+      }
+
+      .services-grid {
         grid-template-columns: 1fr;
       }
 
@@ -494,10 +692,11 @@
   </style>
 </head>
 <body>
+  <div class="bg-blob"></div>
 
   <!-- NAVIGATION -->
   <nav>
-    <a href="index.html" class="nav-logo">Lumi<span>ère</span></a>
+    <a href="index.html" class="nav-logo">Hair by <span>Lacee</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="services.html">Services</a></li>
@@ -513,25 +712,56 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content fade-in">
-      <div class="hero-eyebrow">Hair Studio</div>
-      <h1>Where your hair<br /><em>tells your story</em></h1>
-      <p>Expert cuts, color, and styling tailored to you. Step in, relax, and leave feeling like the best version of yourself.</p>
+      <div class="hero-rating">
+        <span class="stars">★★★★★</span>
+        <span>Loved by every client · @xhairbylacee</span>
+      </div>
+      <h1>Your hair, but<br /><em>the best version</em></h1>
+      <p>Licensed extensions specialist and full-service stylist. Length, volume, color, fresh cut — Lacee's got you.</p>
       <div class="hero-btns">
         <a href="contact.html#booking" class="btn btn-primary">Book an Appointment</a>
         <a href="services.html" class="btn btn-outline">Explore Services</a>
       </div>
     </div>
-    <div class="hero-image">
-      <div class="hero-image-placeholder">
-        <div class="placeholder-icon">✂</div>
-        <p>Hero image goes here<br />Recommended: 800×1000px portrait photo</p>
-      </div>
-      <div class="hero-badge fade-in">
-        <div class="badge-icon">⭐</div>
-        <div class="badge-text">
-          <strong>4.9 / 5</strong>
-          <span>From 300+ happy clients</span>
+
+    <!-- PHOTO COLLAGE
+         To go live: replace each <div class="collage-placeholder">…</div>
+         with: <img src="images/photoX.jpg" class="collage-photo" alt="…" />
+         Run process-photos.html or process_photos.py first to crop & enhance.
+    -->
+    <div class="hero-collage-wrap">
+      <div class="hero-collage">
+
+        <!-- COL A (left, slightly low) — photo4: dark long waves from behind -->
+        <div class="collage-col collage-col-a fade-in">
+          <!-- <img src="images/photo4.jpg" class="collage-photo" alt="Hair extensions by Lacee" /> -->
+          <div class="collage-placeholder">
+            <span>✂</span>
+            photo4.jpg
+          </div>
+          <span class="collage-label">Extensions</span>
         </div>
+
+        <!-- COL B (center, tallest) — photo9: pink highlights -->
+        <div class="collage-col collage-col-b fade-in">
+          <!-- <img src="images/photo9.jpg" class="collage-photo" alt="Color & highlights by Lacee" /> -->
+          <div class="collage-placeholder">
+            <span>✂</span>
+            photo9.jpg
+          </div>
+          <span class="collage-label">Color</span>
+        </div>
+
+        <!-- COL C (right, slightly high) — photo8: blonde wavy, sage jacket -->
+        <div class="collage-col collage-col-c fade-in">
+          <!-- <img src="images/photo8.jpg" class="collage-photo" alt="Balayage by Lacee" /> -->
+          <div class="collage-placeholder">
+            <span>✂</span>
+            photo8.jpg
+          </div>
+          <span class="collage-label">Balayage</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -540,20 +770,20 @@
   <section class="stats-bar">
     <div class="stats-inner">
       <div class="stat-item fade-in">
-        <strong>12+</strong>
-        <span>Years of Experience</span>
+        <strong>2+</strong>
+        <span>Years in the Industry</span>
       </div>
       <div class="stat-item fade-in">
-        <strong>3,000+</strong>
-        <span>Happy Clients</span>
+        <strong>Licensed</strong>
+        <span>Extensions Specialist</span>
       </div>
       <div class="stat-item fade-in">
-        <strong>8</strong>
-        <span>Expert Stylists</span>
+        <strong>All</strong>
+        <span>Hair Types & Textures</span>
       </div>
       <div class="stat-item fade-in">
-        <strong>15+</strong>
-        <span>Awards Won</span>
+        <strong>Growing</strong>
+        <span>Client Base Every Week</span>
       </div>
     </div>
   </section>
@@ -569,22 +799,22 @@
       </div>
       <div class="services-grid">
         <div class="service-card fade-in">
+          <div class="service-icon">💇</div>
+          <h3>Extensions</h3>
+          <p>Lacee's specialty. Licensed and trained for natural-looking length and volume that blends seamlessly.</p>
+          <div class="service-price">Consult for pricing</div>
+        </div>
+        <div class="service-card fade-in">
           <div class="service-icon">✂️</div>
           <h3>Cuts & Styling</h3>
-          <p>Precision cuts and blowouts tailored to your face shape, lifestyle, and personal style.</p>
+          <p>Precision cuts and blowouts tailored to your face shape, lifestyle, and vibe — short or long.</p>
           <div class="service-price">From $55</div>
         </div>
         <div class="service-card fade-in">
           <div class="service-icon">🎨</div>
           <h3>Color & Highlights</h3>
-          <p>Full color, balayage, highlights, and toning to give you a vibrant, dimensional look.</p>
+          <p>Full color, balayage, partial or full highlights, and toning. Dimensional results every time.</p>
           <div class="service-price">From $95</div>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon">✨</div>
-          <h3>Treatments</h3>
-          <p>Deep conditioning, keratin smoothing, and scalp treatments to restore and protect your hair.</p>
-          <div class="service-price">From $75</div>
         </div>
       </div>
       <div style="text-align:center; margin-top: 2.5rem;">
@@ -597,94 +827,102 @@
   <section class="section">
     <div class="why-grid">
       <div class="why-image-block">
-        <div class="why-img-main">✂</div>
+        <!-- photo7: long dark curly hair — most dramatic showcase shot -->
+        <!-- Replace placeholder with: <img src="images/photo7.jpg" ... /> once processed -->
+        <div class="why-img-main" style="background: linear-gradient(160deg, #2a1a14 0%, #1a0e0a 100%); color: rgba(255,255,255,0.15); font-size: 2rem;">
+          photo7.jpg
+        </div>
+        <!-- <img src="images/photo7.jpg" class="why-img-main"
+             style="object-fit:cover; border-radius: var(--radius);
+                    filter: brightness(1.04) contrast(1.18) saturate(1.2) sepia(0.09) hue-rotate(-6deg);"
+             alt="Long hair extensions by Lacee" /> -->
         <div class="why-img-accent"></div>
       </div>
       <div>
-        <div class="section-label">Why Lumière</div>
+        <div class="section-label">Why Book with Lacee</div>
         <h2 class="section-title">More than just a great haircut</h2>
         <div class="divider divider-left"></div>
-        <p>We believe a salon visit should feel like a retreat — a moment to breathe, be cared for, and leave feeling genuinely you. Our stylists combine artistry with technical expertise to make every appointment exceptional.</p>
+        <p>Lacee isn't just good at hair — she's genuinely passionate about it. Every client gets her full attention, real conversation, and a result that fits their life. New clients find her through Instagram and word of mouth, and they keep coming back.</p>
         <ul class="feature-list">
           <li>
             <div class="feature-check">✓</div>
             <div>
-              <strong>Personalized Consultations</strong>
-              <p>Every appointment starts with a thorough consultation so we truly understand your vision.</p>
+              <strong>Licensed Extensions Specialist</strong>
+              <p>Certified and trained specifically for extensions — not just someone who does them on the side.</p>
             </div>
           </li>
           <li>
             <div class="feature-check">✓</div>
             <div>
-              <strong>Premium Products Only</strong>
-              <p>We use only top-tier, hair-healthy products — nothing harsh, everything intentional.</p>
+              <strong>Real Consultation, Every Time</strong>
+              <p>Lacee listens before she touches your hair. Your vision drives the appointment — always.</p>
             </div>
           </li>
           <li>
             <div class="feature-check">✓</div>
             <div>
-              <strong>Ongoing Education</strong>
-              <p>Our team trains regularly on the latest techniques to keep your looks fresh and current.</p>
+              <strong>Proficient Across All Services</strong>
+              <p>Cuts, color, treatments, styling — she's comfortable with it all and has excelled in every setting.</p>
             </div>
           </li>
           <li>
             <div class="feature-check">✓</div>
             <div>
-              <strong>A Space You'll Love</strong>
-              <p>Comfortable, beautiful, and calm — our salon is designed to make you feel at ease.</p>
+              <strong>Good Energy, Zero Pretension</strong>
+              <p>The vibe is warm, talkative, and fun. Come as you are and leave loving your hair.</p>
             </div>
           </li>
         </ul>
         <div style="margin-top: 2rem;">
-          <a href="about.html" class="btn btn-primary">Meet Our Team</a>
+          <a href="about.html" class="btn btn-primary">Meet Lacee</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="section testimonials">
-    <div class="container">
-      <div class="text-center">
-        <div class="section-label">Client Love</div>
-        <h2 class="section-title">What our guests are saying</h2>
-        <div class="divider"></div>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card fade-in">
-          <div class="stars">★★★★★</div>
-          <blockquote>"I've been going to Lumière for two years and I wouldn't trust anyone else with my hair. Every visit feels like a treat!"</blockquote>
-          <div class="reviewer">
-            <div class="reviewer-avatar">S</div>
-            <div>
-              <div class="reviewer-name">Sophia R.</div>
-              <div class="reviewer-tag">Regular Client</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card fade-in">
-          <div class="stars">★★★★★</div>
-          <blockquote>"Best balayage I've ever had. The team really listened and the result was exactly what I had in mind — actually better."</blockquote>
-          <div class="reviewer">
-            <div class="reviewer-avatar">M</div>
-            <div>
-              <div class="reviewer-name">Maya L.</div>
-              <div class="reviewer-tag">Color Client</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card fade-in">
-          <div class="stars">★★★★★</div>
-          <blockquote>"The atmosphere alone makes this place worth it. But the haircut? Incredible. I get compliments every single time."</blockquote>
-          <div class="reviewer">
-            <div class="reviewer-avatar">J</div>
-            <div>
-              <div class="reviewer-name">James T.</div>
-              <div class="reviewer-tag">Cut & Style Client</div>
-            </div>
-          </div>
+  <!-- PORTFOLIO STRIP -->
+  <section class="portfolio-strip">
+    <div class="portfolio-strip-header fade-in">
+      <div class="section-label">From the Chair</div>
+      <h2 style="color:white; margin-bottom:0;">Recent Work</h2>
+    </div>
+    <!-- Portfolio rail — 3 photos side by side, full-bleed -->
+    <!-- To go live: replace each .portfolio-ph div with an <img> tag -->
+    <div class="portfolio-rail">
+
+      <!-- photo3: blonde girl, salon flower wall -->
+      <div class="portfolio-item">
+        <!-- <img src="images/photo3.jpg" alt="Blonde hair by Lacee" /> -->
+        <div class="portfolio-ph"><span>✂</span>photo3.jpg</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-item-tag">Cut & Style</div>
+          <div class="portfolio-item-label">Blonde refresh</div>
         </div>
       </div>
+
+      <!-- photo6: silver/ash hair from behind -->
+      <div class="portfolio-item">
+        <!-- <img src="images/photo6.jpg" alt="Ash hair by Lacee" /> -->
+        <div class="portfolio-ph"><span>✂</span>photo6.jpg</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-item-tag">Color</div>
+          <div class="portfolio-item-label">Silver & ash toning</div>
+        </div>
+      </div>
+
+      <!-- photo10: dark brunette waves, flower wall -->
+      <div class="portfolio-item">
+        <!-- <img src="images/photo10.jpg" alt="Dark hair extensions by Lacee" /> -->
+        <div class="portfolio-ph"><span>✂</span>photo10.jpg</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-item-tag">Extensions</div>
+          <div class="portfolio-item-label">Volume & length</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="portfolio-strip-footer">
+      <a href="contact.html#booking" class="btn btn-primary">Book Your Transformation</a>
     </div>
   </section>
 
@@ -693,7 +931,7 @@
     <div style="position:relative; z-index:1;">
       <div class="section-label" style="color:var(--blush);">Ready?</div>
       <h2>Your best hair is waiting</h2>
-      <p>Book your appointment today and experience the Lumière difference.</p>
+      <p>Book with Lacee today — real results, good vibes, and hair you'll actually love.</p>
       <div class="cta-banner-btns">
         <a href="contact.html#booking" class="btn btn-primary">Book Now</a>
         <a href="contact.html" class="btn btn-light">Get in Touch</a>
@@ -705,8 +943,8 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo">Lumi<span style="color:var(--blush)">ère</span></a>
-        <p>A modern hair studio dedicated to making you look and feel your absolute best — every single visit.</p>
+        <a href="index.html" class="nav-logo">Hair by <span style="color:var(--blush)">Lacee</span></a>
+        <p>Licensed extensions specialist and full-service stylist. Cute, elegant, and always real — just like your hair should be.</p>
       </div>
       <div class="footer-col">
         <h4>Navigate</h4>
@@ -728,7 +966,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Lumière Salon. All rights reserved.</p>
+      <p>© 2026 Hair by Lacee. All rights reserved.</p>
     </div>
   </footer>
 

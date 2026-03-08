@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services — Lumière Salon</title>
+  <title>Services — Hair by Lacee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ===== SERVICE CATEGORIES ===== */
@@ -160,6 +160,93 @@
       line-height: 1.6;
     }
 
+    /* ===== WORK SHOWCASE ===== */
+    .work-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-bottom: 4rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(44,40,37,0.14);
+    }
+
+    .showcase-item {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+    }
+
+    .showcase-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(1.04) contrast(1.18) saturate(1.22) sepia(0.09) hue-rotate(-6deg);
+      transition: filter 0.4s ease, transform 0.4s ease;
+      display: block;
+    }
+
+    .showcase-item:hover img {
+      filter: brightness(1.10) contrast(1.20) saturate(1.30) sepia(0.04) hue-rotate(-3deg);
+      transform: scale(1.06);
+    }
+
+    .showcase-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(20,12,8,0.65) 100%);
+      pointer-events: none;
+    }
+
+    .showcase-caption {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      z-index: 2;
+      color: white;
+    }
+
+    .showcase-caption-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 0.25rem;
+    }
+
+    .showcase-caption-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* Placeholder */
+    .showcase-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      font-family: var(--font-sans);
+    }
+    .showcase-ph span { font-size: 1.8rem; opacity: 0.2; }
+    .showcase-item:nth-child(1) .showcase-ph { background: #2c1f18; }
+    .showcase-item:nth-child(2) .showcase-ph { background: #1e1512; }
+    .showcase-item:nth-child(3) .showcase-ph { background: #261a14; }
+
+    @media (max-width: 600px) {
+      .work-showcase { grid-template-columns: 1fr; }
+      .showcase-item:nth-child(2),
+      .showcase-item:nth-child(3) { display: none; }
+    }
+
     /* ===== POLICY SECTION ===== */
     .policy-section {
       background: var(--charcoal);
@@ -226,10 +313,11 @@
   </style>
 </head>
 <body>
+  <div class="bg-blob"></div>
 
   <!-- NAVIGATION -->
   <nav>
-    <a href="index.html" class="nav-logo">Lumi<span>ère</span></a>
+    <a href="index.html" class="nav-logo">Hair by <span>Lacee</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html" class="active">Services</a></li>
@@ -273,10 +361,107 @@
         <div class="info-card">
           <div class="info-card-icon">🎓</div>
           <div>
-            <h4>Certified Stylists</h4>
-            <p>All our stylists are licensed, experienced, and continuously trained on new techniques.</p>
+            <h4>Licensed Specialist</h4>
+            <p>Lacee is licensed and certified specifically for hair extensions — not just trained, properly certified.</p>
           </div>
         </div>
+      </div>
+
+      <!-- WORK SHOWCASE — photos 1, 2, 5 -->
+      <!-- To go live: replace each .showcase-ph with <img src="images/photoX.jpg" alt="…" /> -->
+      <div class="work-showcase fade-in">
+
+        <!-- photo1: ash blonde texture close-up -->
+        <div class="showcase-item">
+          <!-- <img src="images/photo1.jpg" alt="Ash blonde highlights by Lacee" /> -->
+          <div class="showcase-ph"><span>✂</span>photo1.jpg</div>
+          <div class="showcase-caption">
+            <div class="showcase-caption-tag">Color</div>
+            <div class="showcase-caption-title">Ash blonde</div>
+          </div>
+        </div>
+
+        <!-- photo2: brunette balayage result -->
+        <div class="showcase-item">
+          <!-- <img src="images/photo2.jpg" alt="Brunette balayage by Lacee" /> -->
+          <div class="showcase-ph"><span>✂</span>photo2.jpg</div>
+          <div class="showcase-caption">
+            <div class="showcase-caption-tag">Balayage</div>
+            <div class="showcase-caption-title">Brunette melt</div>
+          </div>
+        </div>
+
+        <!-- photo5: before/after reddish-brown transformation (after shot) -->
+        <div class="showcase-item">
+          <!-- <img src="images/photo5.jpg" alt="Color transformation by Lacee" /> -->
+          <div class="showcase-ph"><span>✂</span>photo5.jpg</div>
+          <div class="showcase-caption">
+            <div class="showcase-caption-tag">Transformation</div>
+            <div class="showcase-caption-title">Rich brunette</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Extensions -->
+      <div class="service-block fade-in">
+        <div class="service-block-header">
+          <div class="block-icon">💇</div>
+          <h3 class="block-title">Hair Extensions <span style="font-size: 0.75rem; color: var(--rose); font-family: var(--font-sans); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-left: 0.5rem;">Lacee's Specialty</span></h3>
+        </div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Extension Consultation</div>
+              <p class="service-item-desc">We'll assess your hair, discuss your goals, and recommend the right method and length for you.</p>
+            </div>
+            <div>
+              <div class="service-item-price">Free</div>
+              <div class="service-item-duration">~30 min</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Tape-In Extensions</div>
+              <p class="service-item-desc">Flat, seamless wefts applied close to the root for a natural blend with minimal damage.</p>
+            </div>
+            <div>
+              <div class="service-item-price">Consult</div>
+              <div class="service-item-duration">~2–3 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Weft / Sew-In Extensions</div>
+              <p class="service-item-desc">Tracks of hair sewn in for fuller volume and longer length — great for thicker hair types.</p>
+            </div>
+            <div>
+              <div class="service-item-price">Consult</div>
+              <div class="service-item-duration">~2–4 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Extension Maintenance & Move-Up</div>
+              <p class="service-item-desc">Keep your extensions looking fresh — repositioning, tightening, and reblending as they grow out.</p>
+            </div>
+            <div>
+              <div class="service-item-price">Consult</div>
+              <div class="service-item-duration">~1–2 hrs</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-info">
+              <div class="service-item-name">Extension Removal</div>
+              <p class="service-item-desc">Safe, careful removal of extensions with a deep conditioning treatment included.</p>
+            </div>
+            <div>
+              <div class="service-item-price">Consult</div>
+              <div class="service-item-duration">~1 hr</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 0.83rem; color: var(--warm-gray); margin-top: 1rem; padding-left: 0.25rem;">✦ Extension pricing depends on method, hair length, and the amount of hair needed. A free consultation is required before booking.</p>
       </div>
 
       <!-- Cuts & Styling -->
@@ -488,8 +673,8 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo">Lumi<span style="color:var(--blush)">ère</span></a>
-        <p>A modern hair studio dedicated to making you look and feel your absolute best — every single visit.</p>
+        <a href="index.html" class="nav-logo">Hair by <span style="color:var(--blush)">Lacee</span></a>
+        <p>Licensed extensions specialist and full-service stylist. Cute, elegant, and always real — just like your hair should be.</p>
       </div>
       <div class="footer-col">
         <h4>Navigate</h4>
@@ -511,7 +696,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Lumière Salon. All rights reserved.</p>
+      <p>© 2026 Hair by Lacee. All rights reserved.</p>
     </div>
   </footer>
 
